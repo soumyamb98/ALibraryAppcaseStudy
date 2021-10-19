@@ -99,11 +99,17 @@
           <div class="row">    
             <!-- <form action="/admin/addbook" method="GET" class="myaddform" id="myaddform" onsubmit="return validate()"> -->
             <!-- <form action="/admin/addbook" method="GET" > -->
-            <form action="/admin/addbook" method="POST" class="myaddform" id="myaddform" >
+            <form action="/admin/addbook" method="post" class="myaddform" id="myaddform" enctype="multipart/form-data">
                 Title: <input type="text" name="title" class="myaddforminput" id="titlebook" required> <br>
                 Author: <input type="text" name="author" class="myaddforminput" id="authorbook" required> <br>
                 genre: <input type="text" name="genre" class="myaddforminput" id="genrebook" required> <br>
-                Image: <input type="file" name="image" id="imagebook" required accept="image/*"> <br>
+                
+                <!-- <form action="" method="post" enctype="multipart/form-data"> -->
+                Image: <input type="file" name="image" required accept="image/*">
+                <!-- Image: <input type="file" name="image" id="imagebook" required accept="image/*"> -->
+                <button>preview</button>
+                <!-- </form> -->
+                 <br>
                 <button type="submit" class="myaddformbuttons">Add books</button> <br>
             </form>
           </div>

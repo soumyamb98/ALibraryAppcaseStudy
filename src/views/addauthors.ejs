@@ -100,7 +100,7 @@
 
           <div class="row">    
             <!-- <form action="" method="get" class="myaddform" id="myaddform" onsubmit="return validate()"> -->
-            <form action="/adminAuthors/addauthor" method="POST" class="myaddform" id="myaddform" >
+            <form action="/adminAuthors/addauthor" method="post" class="myaddform" id="myaddform" enctype="multipart/form-data">
                 Author: <input type="text" name="title" id="authorauthor" required class="myaddforminput"> <br>
                 born: <input type="text" name="author" id="authorborn" required class="myaddforminput"><br>
                 details: <input type="text" name="genre" id="authordetails" required class="myaddforminput myaddforminputdetailauthors"><br>

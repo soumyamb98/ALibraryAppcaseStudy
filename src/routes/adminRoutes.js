@@ -2,7 +2,7 @@ const express = require("express");
 const adminRouter = express.Router();
 
 
-
+const multer = require('multer');
 const bookdata = require("../model/mybookdata");
 
 function applier(nav) {
@@ -17,8 +17,25 @@ function applier(nav) {
     });
     adminRouter.get("/single", function (req, res) {
         res.send("Im that book");
-    })
-    adminRouter.post("/addbook", function (req, res) {
+    });
+
+
+
+    var fileStorageEngine = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, './public/images/')
+        },
+        filename: (req, file, cb) => {
+            cb(null, Date.now() + '--' + file.originalname);
+        },
+    });
+    var imageupload = multer({ storage: fileStorageEngine });
+    adminRouter.post("/single",imageupload.single('image'), (req, res) => {
+        
+        console.log(req.file);
+        res.send("single file upload success");
+    });
+    adminRouter.post("/addbook", imageupload.single('image'),function (req, res) {
         // res.send("hey I'm added");
         // var queryItems = {
         //     title: req.query.title,
@@ -35,8 +52,10 @@ function applier(nav) {
             title: req.body.title,
             author: req.body.author,
             genre: req.body.genre,
-            image: req.body.image
+            image: req.file.filename
+            // image: req.body.image
         };
+        // console.log(req.file);
         var savebookdata = bookdata(bodyItems);
         //saving bookdata to database this after executing codes to check structure/schema and converting it into model and exporting it into adminRouter.js
         savebookdata.save();

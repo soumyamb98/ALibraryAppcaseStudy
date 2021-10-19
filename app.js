@@ -1,6 +1,7 @@
 const express = require("express");
 const app = new express();
-
+const ejs = require("ejs");
+const path = require('path');
 
 const port = process.env.PORT || 5000;
 const nav = [{
