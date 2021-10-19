@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>
+    <%=title%>
+  </title>
+  <meta name="generator" content="Bootply" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/public/css/styles.css" rel="stylesheet">
+  <script defer src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+  <script defer src="js/bootstrap.min.js"></script>
+</head>
+
+
+
+
+
+
+
+
+
+
+<body class="myindexbody">
+  <header class="navbar navbar-bright navbar-fixed-top myheader" role="banner">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand">Home</a>
+      </div>
+      <nav class="collapse navbar-collapse mynav" role="navigation">
+        <ul class="nav navbar-nav">
+          <%for(i=0;i<nav.length;i++){%>
+            <li>
+              <a href="<%=nav[i].link%>">
+                <%=nav[i].name%>
+              </a>
+            </li>
+            <%}%>
+        </ul>
+
+      </nav>
+    </div>
+  </header>
+
+  <div id="mytitle">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h1>
+            <%=title%>
+              <p class="lead"></p>
+          </h1>
+        </div>
+
+      </div>
+    </div><!-- /cont -->
+
+
+    <div class="container row mybuttons" id="mybuttons">
+      <button class="mybuttonsa"><a href="" class="mybuttonsaa">Authors</a></button>
+      <button class="mybuttonsa"><a href="" class="mybuttonsaa">books</a></button>
+      <button class="mybuttonsa"><a href="" class="mybuttonsaa">home</a></button>
+      <button class="mybuttonsa mybuttonsa2"><a href="" class="mybuttonsaa">Add Authors</a></button>
+      <button class="mybuttonsa mybuttonsa2"><a href="" class="mybuttonsaa">Add books</a></button>
+      
+      
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer id="myfooter">
+      <!-- <div class="container"> -->
+        <!-- <div class="row">
+          <div class="col-sm-6"> -->
+            <ul class="list-inline">
+
+              <li><i class="icon-twitter icon-2x myicons"></i></li>
+
+              <li><i class="icon-pinterest icon-2x myicons"></i></li>
+            </ul>
+
+
+          <!-- </div>
+        </div> -->
+      <!-- </div> -->
+    </footer>
+    <!-- script references -->
+
+</body>
+
+</html>

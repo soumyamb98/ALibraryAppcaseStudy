@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  signup </title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/stylesignupform.css">
+    <link rel="stylesheet" href="/public/css/stylesignupform.css">
+
+    <script defer src="js/signupform.js"></script>
+    <script defer src="/public/js/signupform.js"></script>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <script defer src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    
+    </head>
+
+    <body class="mysignupbody">
+        <header class="mainheader loginheader" id="mysignupheader">
+        
+        <nav class="mynav mainmynav mysignupnav">
+                <ul>
+                    <!-- <center> -->
+                        
+                        <li> <a href="/"> Log In </a> </li>
+                        
+                    <!-- </center> -->
+                </ul>
+                       
+        </nav>
+
+        <h2 class="kerala-name kerala-name-large" > SIGN UP </h2>
+       
+  
+      </header>
+
+
+      <section class="container mysignup">
+
+        
+        <form action="/" onsubmit="return validate()" id="form">
+            
+          <div class="form-group">
+            <label class="form-label"> Username </label>
+            <input type="text" placeholder="type name" id="urme" class="form-control" autofocus>
+            <span id="usrerror" class="text-danger font-weight-bold"> </span>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="form-label"> Mobile number </label>
+            <input type="text" placeholder="you may enter your original number :-)" id="mnumber" class="form-control">
+            <span>mobile number start with 5-9, total 10 digits</span> <br>
+            <span id="mnerror" class="text-danger font-weight-bold"> </span>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="form-label"> email </label>
+            <input type="email" placeholder="type email" id="email" class="form-control">
+            <span id="emailerror" class="text-danger font-weight-bold"> </span>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="form-label" onkeyup="validate5()"> Password </label>
+            <input type="password" placeholder="atleast one alpha upper, one alpha lower, spcl char and number" id="pwd" class="form-control">
+            <span id="perror" class="text-danger font-weight-bold"> </span>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="form-label"> confirm password </label>
+            <input type="password" placeholder="atleast one alpha upper, one alpha lower, spcl char and number" id="ppwd" class="form-control form-control-ppwd">
+            <span id="pperror" class="text-danger font-weight-bold"> </span>
+          </div>
+          <br>
+
+          <!-- <progress class="progress" max="100" id="strength" style="width:100%"></progress> -->
+        <!-- <meter max="4" id="password-strength-meter"></meter> -->
+              <!-- <p id="password-strength-text"></p> -->
+          
+              <br>
+              <span id="StrengthDisp" class="badge displayBadge">Weak</span>
+              <br>
+          
+
+         <input type="submit" class=" btn btn-primary">
+         
+         <br>
+         <br>
+
+
+        </form>
+      </section>
+
+      <div class="mymsgclassverifychar" id="message">
+        <h2>Password must contain the following:</h2>
+        <p id="letter" class="invalid">1]  A <b>lowercase</b> letter</p>
+        <p id="capital" class="invalid">2]  A <b>capital (uppercase)</b> letter</p>
+        <p id="spclchar" class="invalid">3]  A <b>special character</b> </p>
+        <p id="number" class="invalid">4]  A <b>number</b></p>
+        <p id="length" class="invalid">5]  Minimum <b>8 characters</b></p>
+      </div>
+          
+  
+  
+  
+  
+  
+  
+    
+
+    
+
+
+
+
+       <!-- check links and iconsize -->
+       <footer id="myfooter container">
+        <!-- <div class="container"> -->
+          <!-- <div class="row">
+            <div class="col-sm-6"> -->
+              <ul class="list-inline">
+  
+                <li class="myiconssignup"><i class="icon-twitter icon-2x myiconssignups"></i></li>
+  
+                <li class="myiconssignup"><i class="icon-pinterest icon-2x myiconssignups"></i></li>
+              </ul>
+  
+  
+            <!-- </div>
+          </div> -->
+        <!-- </div> -->
+      </footer>
+      <!-- script references -->
+  
+    
+            </body>
+            </html>
