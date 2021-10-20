@@ -15,7 +15,7 @@ function applier(nav) {
     });
     adminAuthorsRouter.get("/single", function (req, res) {
         res.send("Im that book");
-    })
+    });
 
     var fileStorageEngine = multer.diskStorage({
         destination: (req, file, cb) => {

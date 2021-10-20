@@ -9,11 +9,16 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		
 		<link href="css/styles.css" rel="stylesheet">
 		<link href="/css/styles.css" rel="stylesheet">
+
+
+    <script defer src="/public/js/addauthors.js"></script>
+    <script defer src="js/addauthors.js"></script>
+    <script defer src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script defer src="js/bootstrap.min.js"></script>
+		<script defer src="/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 <header class="navbar navbar-bright navbar-fixed-top" role="banner">
@@ -53,7 +58,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>books
+        <h1>To update Authors
           <p class="lead"></p>
         </h1>
       </div>
@@ -92,30 +97,20 @@
           
           
           <!--/stories-->
-          <%for(i=0;i<books.length;i++){%>
+         
 
           <div class="row">    
-            <br>
-            <div class="col-md-2 col-sm-3 text-center">
-              <a class="story-title" href="#"><img alt="" src="/images/<%=books[i].image%>" style="width:100px;height:100px" class="img-circle"></a>
-            </div>
-            <div class="col-md-10 col-sm-9">
-              <h3><%=books[i].title%></h3>
-              <div class="row">
-                <div class="col-xs-9">
-                  <h4><span class="label label-default"><%=books[i].author%></span></h4><h4>
-                  <small style="font-family:courier,'new courier';" class="text-muted"><%=books[i].genre%>  • 
-                    <!-- <a href="/books/<%=i%>" class="text-muted">Read More</a></small> -->
-                    <a href="/books/<%=books[i]._id%>" class="text-muted">Read More</a></small>
-                  </h4></div>
-                  <button type=""><a href="/books/delete/<%=books[i]._id%>">delete</a></button>
-                  <button type=""><a href="/books/addbooksupdating/<%=books[i]._id%>">update</a></button>
-                <div class="col-xs-3"></div>
-              </div>
-              <br><br>
-            </div>
+            <!-- <form action="" method="get" class="myaddform" id="myaddform" onsubmit="return validate()"> -->
+            <form action="/authors/atupdate" method="post" class="myaddform" id="myaddform" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="<%=books[i]._id%>">
+                Author: <input type="text" name="title" value="<%=authors[i].title%>" id="authorauthor" required class="myaddforminput"> <br>
+                born: <input type="text" name="author" value="<%=authors[i].author%>" id="authorborn" required class="myaddforminput"><br>
+                details: <input type="text" name="genre" value="<%=authors[i].genre%>" id="authordetails" required class="myaddforminput myaddforminputdetailauthors"><br>
+                Image: <input type="file" name="image" value="/images/<%=authors[i].image%>" id="authorimages" required accept="image/*"> <br>
+                <button type="submit" class="myaddformbuttons">Add Authors</button> <br>
+            </form>
           </div>
-          <%}%>
+         
           <hr>
           
           
@@ -175,7 +170,6 @@
   </div>
 </footer>
 	<!-- script references -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
+		
 	</body>
 </html>

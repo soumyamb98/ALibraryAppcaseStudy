@@ -3,68 +3,47 @@ const booksRouter = express.Router();
 
 
 const Bookdata = require('../model/mybookdata');
+const fs = require('fs');
+
+const AddbooksupdatingRouter = require('../routes/addbooksupdating');
+var multer = require('multer');
+
+
 function applier(nav) {
-    // var books = [
-    //     {
-    //         title: "tom and jerry",
-    //         author: "joseph barbara",
-    //         genre: "cartoon",
-    //         img: "tomandjerry.jpg"
-    //     },
-    //     {
-    //         title: "Charlotte’s Web",
-    //         author: "E.B. White",
-    //         genre: "Children's Literature",
-    //         img: "acharlottesweb.webp"
-    //     },
-    //     {
-    //         title: "The Hitchhiker’s Guide to the Galaxy",
-    //         author: "Douglas Adams",
-    //         genre: "science fiction",
-    //         img: "The Hitchhiker’s Guide to the Galaxy.jpg"
-    //     },
-    //     {
-    //         title: "Winnie-the-Pooh",
-    //         author: "A.A. Milne, Ernest H. Shepard",
-    //         genre: "cartoon",
-    //         img: "Winnie-the-Pooh.jpg"
-    //     },
-    //     {
-    //         title: "The Kite Runner",
-    //         author: "Khaled Hosseini",
-    //         genre: "Literary realism",
-    //         img: "The Kite Runner by Khaled Hosseini.jpg"
-    //     }
-    // ]
+
+
+
+
+    // AddbooksupdatingRouter.get("/", function (req, res) {
+    //     res.render("addbooksupdating", {
+           
+    //         nav,
+    //         title: "library",
+            
+    //     });
+    // });
+    
     booksRouter.get("/", function (req, res) {
         
         Bookdata.find()
             .then(function (books) {
                
                 res.render("books", {
-                    // nav: [{
-                    //     link: "/books", name: "books"
-                    // },
-                    // {
-                    //     link: "/authors", name: "authors"
-                    // }],
+                    
                     nav,
                     title: "library",
                     books
                 });
-            })
-        // res.render("books", {
-        //     // nav: [{
-        //     //     link: "/books", name: "books"
-        //     // },
-        //     // {
-        //     //     link: "/authors", name: "authors"
-        //     // }],
-        //     nav,
-        //     title: "library",
-        //     books
-        // });
+            });
     });
+    // booksRouter.get("/addbooksupdating", function (req, res) {
+        
+    //     res.render("addbooksupdating", {
+    //         nav,
+    //         title: "library",
+    //     });
+    // });
+    
     // booksRouter.get("/single", function (req, res) {
     //     res.send("Im that book");
     // })
@@ -80,30 +59,114 @@ function applier(nav) {
                     book
                 });
         })
-        // res.render("book", {
-        //     // nav: [{
-        //     //     link: "/books", name: "books"
-        //     // },
-        //     // {
-        //     //     link: "/authors", name: "authors"
-        //     // }],
-        //     nav,
-        //     title: "library",
-        //     book: books[i]
-        // });
+        
     });
-    booksRouter.delete('/delete/:id', function (req, res) {
+    booksRouter.get('/delete/:id', function (req, res) {
         const i = req.params.id;
+        Bookdata.findByIdAndDelete(i, function (err) {
+            if (err) throw err;
+            res.redirect('/books');
+        })
+    });
+    var fileStorageEngine = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, './public/images/')
+        },
+        filename: (req, file, cb) => {
+            cb(null, Date.now() + '--' + file.originalname);
+        },
+    });
+    var imageupload = multer({ storage: fileStorageEngine });
 
-        Bookdata.findOneAndRemove({ _id: i }, function (err, foundObject) {
+    // booksRouter.get('/addbooksupdating/:id', function (req, res) {
+    //     const i = req.params.id;
+    //     Bookdata.findByIdAndUpdate(i, function (err) {
+    //         if (err) throw err;
+    //         res.redirect('/books');
+    //     });
+        // booksRouter.get('/addbooksupdating/:id', function (req, res, next) {
+        //     var i = req.params.id;
+        //     Bookdata.findById(i, function (err) {
+        //         if (err) throw err;
+        //         res.render("addbooksupdating", {
+        //             nav,
+        //             title: "library",
+        //         });
+        //     });
+        // });
+    
+    booksRouter.get("/bkupdate/:id", function (req, res) {
+        let id = req.params.id;
+        Bookdata.findById(id), (err, user) => {
             if (err) {
-                console.log(err);
-                return res.status(500).send();
+                res.redirect("/");
+            } else {
+                if (user == null) {
+                    res.render('/');
+                } else {
+                    res.render('addbooksupdating', {
+                        nav,
+                    title: "library",
+                    })
+                }
             }
-            return res.status(200).send();
-        });
-    booksRouter.put('/update/:id', function (req, res) {
-        const i = req.params.id;
+        }
+    })
+
+
+    booksRouter.post('/bkupdate/:id', imageupload.single('image'), function(req, res, next){
+        let id = req.params.id;
+        let new_image = '';
+        if (req.file) {
+            new_image = req.file.filename;
+            try {
+                fs.unlinkSync('./images/'+req.body.old_image)
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            new_image = req.body.old_image;
+        }
+        Bookdata.findByIdAndUpdate(id, {
+            title: req.body.title,
+            author: req.body.author,
+            genre: req.body.genre,
+            image: new_image
+        }, (err, result) => {
+            if (err) {
+                res.json({ message: err.message, type: 'danger' });
+            } else {
+                req.session.message = {
+                    type: 'success',
+                    message: "books updated successfully"
+                };
+                res.redirect('/books');
+            };
+        })
+    })
+        // booksRouter.post('/bkupdate', imageupload.single('image'),function (req, res, next) {
+        //     var bkupdate = Bookdata.findByIdAndUpdate(req.body.id, {
+        //         title: String,
+        //         author: String,
+        //         genre: String,
+        //         image: String
+        //     });
+        //     bkupdate(function (err) {
+        //         if (err) throw err;
+        //         res.redirect('/books')
+        //     });
+        // });
+
+
+        // Bookdata.findOneAndRemove({ _id: i }, function (err, foundObject) {
+        //     if (err) {
+        //         console.log(err);
+        //         return res.status(500).send();
+        //     }
+        //     return res.status(200).send();
+        // });
+    // booksRouter.put('/update/:id', function (req, res) {
+    //     const i = req.params.id;
 
         // Bookdata.findOne({ _id: i }, function (err, foundObject) {
         //     if (err) {
@@ -118,11 +181,11 @@ function applier(nav) {
         //             }
         //         }
         //     }
-            return res.status(200).send();
-        });
+        //     return res.status(200).send();
+        // });
         
         
-    })
+    // })
     return booksRouter;
 }
 // module.exports = booksRouter;

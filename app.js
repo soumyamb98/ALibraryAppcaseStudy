@@ -29,6 +29,7 @@ const adminRouter = require("./src/routes/adminRoutes")(nav);
 
 
 const adminAuthorsRouter = require("./src/routes/adminAuthorsRoutes")(nav);
+// const AddbooksupdatingRouter = require("./src/routes/addbooksupdating")(nav);
 
 // const booksRouter = express.Router(); // moved to bookroutes.js
 // const signUpRouter = express.Router();
@@ -59,7 +60,7 @@ app.use("/index", indexRouter);
 app.use("/admin", adminRouter);
 app.use("/adminAuthors", adminAuthorsRouter);
 
-
+// app.use("/books/addbooksupdating", AddbooksupdatingRouter);
 
 // or app.set("views","./src/views")
 // app.get("/", function (req, res) {

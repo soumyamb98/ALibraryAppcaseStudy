@@ -6,7 +6,6 @@
 		<title><%=title%></title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 		<!--[if lt IE 9]>
@@ -14,6 +13,10 @@
 		<![endif]-->
 		<link href="css/styles.css" rel="stylesheet">
 		<link href="/css/styles.css" rel="stylesheet">
+
+
+    <!-- <script defer src="/public/js/addbooks.js"></script> -->
+    <script defer src="/js/addbooks.js"></script>
 	</head>
 	<body>
 <header class="navbar navbar-bright navbar-fixed-top" role="banner">
@@ -53,7 +56,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>books
+        <h1>To update books
           <p class="lead"></p>
         </h1>
       </div>
@@ -92,30 +95,28 @@
           
           
           <!--/stories-->
-          <%for(i=0;i<books.length;i++){%>
+         
 
           <div class="row">    
-            <br>
-            <div class="col-md-2 col-sm-3 text-center">
-              <a class="story-title" href="#"><img alt="" src="/images/<%=books[i].image%>" style="width:100px;height:100px" class="img-circle"></a>
-            </div>
-            <div class="col-md-10 col-sm-9">
-              <h3><%=books[i].title%></h3>
-              <div class="row">
-                <div class="col-xs-9">
-                  <h4><span class="label label-default"><%=books[i].author%></span></h4><h4>
-                  <small style="font-family:courier,'new courier';" class="text-muted"><%=books[i].genre%>  • 
-                    <!-- <a href="/books/<%=i%>" class="text-muted">Read More</a></small> -->
-                    <a href="/books/<%=books[i]._id%>" class="text-muted">Read More</a></small>
-                  </h4></div>
-                  <button type=""><a href="/books/delete/<%=books[i]._id%>">delete</a></button>
-                  <button type=""><a href="/books/addbooksupdating/<%=books[i]._id%>">update</a></button>
-                <div class="col-xs-3"></div>
-              </div>
-              <br><br>
-            </div>
+           
+            <form action="/admin/bkupdate<%=books[i]._id%>" method="post" class="myaddform" id="myaddform" enctype="multipart/form-data">
+             
+              <input type="hidden" name="id" value="<%=books[i]._id%>">
+                Title: <input type="text" name="title" value="<%=books[i].title%>" class="myaddforminput" id="titlebook" required> <br>
+                Author: <input type="text" name="author" value="<%=books[i].author%>" class="myaddforminput" id="authorbook" required> <br>
+                genre: <input type="text" name="genre" value="<%=books[i].genre%>" class="myaddforminput" id="genrebook" required> <br>
+                
+                
+                Image: <input type="file" name="image" accept="image/*">
+                <img src="/images/<%=books[i].image%>" alt="" width="50" class="img-thumbnail mt-1">
+                <input type="hidden" name="old_image" value="/images/<%=books[i].image%>" id=""><!-- Image: <input type="file" name="image" id="imagebook" required accept="image/*"> -->
+                <button>preview</button>
+                <!-- </form> -->
+                 <br>
+                <button type="submit" class="myaddformbuttons">To edit books</button> <br>
+            </form>
           </div>
-          <%}%>
+         
           <hr>
           
           
