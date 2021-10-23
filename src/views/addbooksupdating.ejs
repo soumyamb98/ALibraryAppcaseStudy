@@ -99,7 +99,7 @@
 
           <div class="row">    
            
-            <form action="/admin/bkupdate<%=books[i]._id%>" method="post" class="myaddform" id="myaddform" enctype="multipart/form-data">
+            <form action="/addbooksupdating/<%=books[i]._id%>" method="post" class="myaddform" id="myaddform" enctype="multipart/form-data">
              
               <input type="hidden" name="id" value="<%=books[i]._id%>">
                 Title: <input type="text" name="title" value="<%=books[i].title%>" class="myaddforminput" id="titlebook" required> <br>
@@ -109,9 +109,9 @@
                 
                 Image: <input type="file" name="image" accept="image/*">
                 <img src="/images/<%=books[i].image%>" alt="" width="50" class="img-thumbnail mt-1">
-                <input type="hidden" name="old_image" value="/images/<%=books[i].image%>" id=""><!-- Image: <input type="file" name="image" id="imagebook" required accept="image/*"> -->
+                <input type="hidden" name="old_image" value="/images/<%=books[i].image%>" id="">
                 <button>preview</button>
-                <!-- </form> -->
+                
                  <br>
                 <button type="submit" class="myaddformbuttons">To edit books</button> <br>
             </form>

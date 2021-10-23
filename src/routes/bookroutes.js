@@ -84,7 +84,7 @@ function applier(nav) {
     //         if (err) throw err;
     //         res.redirect('/books');
     //     });
-        // booksRouter.get('/addbooksupdating/:id', function (req, res, next) {
+        // booksRouter.get('/edit/:id', function (req, res, next) {
         //     var i = req.params.id;
         //     Bookdata.findById(i, function (err) {
         //         if (err) throw err;
@@ -95,7 +95,7 @@ function applier(nav) {
         //     });
         // });
     
-    booksRouter.get("/bkupdate/:id", function (req, res) {
+    booksRouter.get("/edit/:id", function (req, res) {
         let id = req.params.id;
         Bookdata.findById(id), (err, user) => {
             if (err) {
@@ -114,13 +114,13 @@ function applier(nav) {
     })
 
 
-    booksRouter.post('/bkupdate/:id', imageupload.single('image'), function(req, res, next){
+    booksRouter.post('/edit/:id', imageupload.single('image'), function (req, res, next) {
         let id = req.params.id;
         let new_image = '';
         if (req.file) {
             new_image = req.file.filename;
             try {
-                fs.unlinkSync('./images/'+req.body.old_image)
+                fs.unlinkSync('./images/' + req.body.old_image)
             } catch (err) {
                 console.log(err);
             }
@@ -143,7 +143,22 @@ function applier(nav) {
                 res.redirect('/books');
             };
         })
-    })
+        });
+
+
+        booksRouter.post('/edit/:id',imageupload.single('image'),(req,res)=>{
+    
+            const id = req.params.id
+          console.log(id)
+        
+            bookdata.findByIdAndUpdate(id, {
+                title: req.body.title,
+                author: req.body.author,
+                genre: req.body.genre,
+                image: req.file.filename
+            }, (err, result) => {
+                res.redirect('/books');
+            });
         // booksRouter.post('/bkupdate', imageupload.single('image'),function (req, res, next) {
         //     var bkupdate = Bookdata.findByIdAndUpdate(req.body.id, {
         //         title: String,
@@ -165,8 +180,8 @@ function applier(nav) {
         //     }
         //     return res.status(200).send();
         // });
-    // booksRouter.put('/update/:id', function (req, res) {
-    //     const i = req.params.id;
+        // booksRouter.put('/update/:id', function (req, res) {
+        //     const i = req.params.id;
 
         // Bookdata.findOne({ _id: i }, function (err, foundObject) {
         //     if (err) {
@@ -185,7 +200,7 @@ function applier(nav) {
         // });
         
         
-    // })
+    });
     return booksRouter;
 }
 // module.exports = booksRouter;

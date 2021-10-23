@@ -48,7 +48,8 @@
       <section class="container mysignup">
 
         
-        <form action="/" onsubmit="return validate()" id="form">
+        <!-- <form action="/" onsubmit="return validate()" id="form"> -->
+        <form action="" id="form">
             
           <div class="form-group">
             <label class="form-label"> Username </label>
@@ -140,7 +141,36 @@
         <!-- </div> -->
       </footer>
       <!-- script references -->
-  
+
+       <!-- <script>
+        const form= document.getElementById('form');
+         form.addEventListener('submit', registerUser)
+        async function registerUser(event){
+          event.preventDefault();
+          const  urme = document.getElementById("urme") ;
+          const  mnumber = document.getElementById("mnumber") ;
+          const  email = document.getElementById("email") ;
+          const pwd = document.getElementById("pwd").value.trim() ;
+          const  ppwd = document.getElementById("ppwd").value.trim() ;
+
+
+         const result = await fetch("/api/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              urme,
+              mnumber,
+              email,
+              pwd,
+              ppwd
+            })
+          }).then(res => res.json())
+          console.log(result)
+        }
+
+      </script> -->
     
             </body>
             </html>

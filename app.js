@@ -3,6 +3,9 @@ const app = new express();
 const ejs = require("ejs");
 const path = require('path');
 
+// const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://authenticatingmongodbatlas:authenticatingmongodbatlas@myappclustera.e2ppr.mongodb.net/MYLIBRARY?retryWrites=true&w=majority', {useNewUrlParser: true}).then(()=> console.log('mongo connected')).catch(err=>console.log(err));
 const port = process.env.PORT || 5000;
 const nav = [{
     link: "/books", name: "books"
@@ -39,7 +42,8 @@ const adminAuthorsRouter = require("./src/routes/adminAuthorsRoutes")(nav);
 // const loginformrouter = require("./src/routes/loginroutes");
 
 const signUpRouter = require("./src/routes/signuproutes");
-
+// app.use(expressLayouts);
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 app.set("view engine", "ejs");
@@ -150,7 +154,18 @@ app.get("/", function (req, res) {
 
 signUpRouter.get("/", function (req, res) {
     res.render("signup")
-});
+})
+// signupRouter.post('/adduser',(req,res)=>{
+//     var item = {
+//         uname:req.body.urme,
+//         pwd:req.body.pwd,
+
+//     }
+//     var user = userdata(item);
+//     user.save();
+//     res.redirect('/');
+// });
+
 indexRouter.get("/", function (req, res) {
     res.render("index",
     {

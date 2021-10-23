@@ -60,6 +60,22 @@ function applier(nav) {
         //saving bookdata to database this after executing codes to check structure/schema and converting it into model and exporting it into adminRouter.js
         savebookdata.save();
         res.redirect('/books');
+
+        adminRouter.post('/edit/:id',imageupload.single('image'),(req,res)=>{
+    
+            const id = req.params.id
+          console.log(id)
+        
+            bookdata.findByIdAndUpdate(id, {
+                title: req.body.title,
+                author: req.body.author,
+                genre: req.body.genre,
+                image: req.file.filename
+            }, (err, result) => {
+                res.redirect('/books');
+            });
+        
+           });
     });
     
     return adminRouter;
